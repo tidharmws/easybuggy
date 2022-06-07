@@ -1,0 +1,13 @@
+.classpath
+.project
+.settings
+target/
+logs/
+server-work/
+*.swp
+*.log
+/.extract
+/.scannerwork
+/.idea/
+/easybuggy.iml
+*.DS_Store
