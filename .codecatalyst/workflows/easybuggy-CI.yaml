@@ -27,7 +27,7 @@ Actions:
         ReportNamePrefix: rpt
     Configuration:
       Steps:
-        - Run: mvn clean install -DskipTests $MVN_SKIPTESTS
+        - Run: mvn clean install -DskipTests #{Variables.MVN_SKIPTESTS}
     Compute:
       Type: EC2
   MendSCA:
