@@ -1,0 +1,51 @@
+Name: easybuggy-CI
+SchemaVersion: "1.0"
+
+Triggers:
+  - Type: Push
+    Branches:
+      - main
+  - Type: PULLREQUEST
+    Branches:
+      - feature/*
+      - dev*
+    Events:
+      - OPEN
+
+Actions:
+  Build:
+    Identifier: aws/build@v1
+    Inputs:
+      Sources:
+        - WorkflowSource
+      Variables:
+        - Name: MVN_SKIPTESTS
+          Value: "true"
+    Outputs:
+      AutoDiscoverReports:
+        Enabled: true
+        ReportNamePrefix: rpt
+    Configuration:
+      Steps:
+        - Run: mvn clean install -DskipTests $MVN_SKIPTESTS
+    Compute:
+      Type: EC2
+  MendSCA:
+    Identifier: mend/mendsca@v1
+    Outputs:
+      Reports:
+        MendSCA:
+          IncludePaths:
+            - report.sarif
+          Format: SARIFSCA
+    Compute:
+      Type: EC2
+    Inputs:
+      Sources:
+        - WorkflowSource
+    Configuration:
+      MendLicenseKey: MEND_LICENSEKEY
+      MendProduct: easybuggy-cc
+      MendProject: branch-name
+    DependsOn:
+      - Build
