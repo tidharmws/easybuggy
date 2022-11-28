@@ -5,12 +5,6 @@ Triggers:
   - Type: Push
     Branches:
       - main
-  - Type: PULLREQUEST
-    Branches:
-      - feature/*
-      - dev*
-    Events:
-      - OPEN
 
 Actions:
   Build:
@@ -18,7 +12,8 @@ Actions:
     Inputs:
       Sources:
         - WorkflowSource
-    Outputs:
-      AutoDiscoverReports:
-        Enabled: true
-        ReportNamePrefix: rpt
+    Compute:
+      Type: EC2
+    Configuration:
+      Steps:
+        - Run: java -version
