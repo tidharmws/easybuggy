@@ -21,6 +21,6 @@
             "minVulnerabilitySeverity": "LOW"
         },
         "enableRenovate": true,
-        "extends": ["github>whitesource/merge-confidence:beta", "config:base", "group:all"]
+        "extends": ["github>whitesource/merge-confidence:beta", "config:base"]
     }
 }
