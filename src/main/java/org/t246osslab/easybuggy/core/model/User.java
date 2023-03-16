@@ -14,6 +14,7 @@ public class User implements Serializable{
     private String mail = null;
     private int loginFailedCount = 0;
     private Date lastLoginFailedTime = null;
+    private String testStr = null;
 
     @Override
     public String toString() {
