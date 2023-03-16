@@ -57,7 +57,7 @@ public class SQLInjectionServlet extends AbstractServlet {
         }
     }
 
-    private String selectUsers(String name, String password, HttpServletRequest req) {
+    private String selectUsers(String name, String uPassword, HttpServletRequest req) {
         
         Connection conn = null;
         Statement stmt = null;
@@ -67,7 +67,7 @@ public class SQLInjectionServlet extends AbstractServlet {
             conn = DBClient.getConnection();
             stmt = conn.createStatement();
             rs = stmt.executeQuery("SELECT name, secret FROM users WHERE ispublic = 'true' AND name='" + name
-                    + "' AND password='" + password + "'");
+                    + "' AND password='" + uPassword + "'");
             StringBuilder sb = new StringBuilder();
             while (rs.next()) {
                 sb.append("<tr><td>" + rs.getString("name") + "</td><td>" + rs.getString("secret") + "</td></tr>");
